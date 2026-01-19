@@ -23,7 +23,7 @@ interface Message {
   parts?: MessagePart[]
 }
 
-export const ReflectPlugin: Plugin = async ({ client, directory }) => {
+export const ReflectPlugin: Plugin = async ({ client, directory, $ }) => {
   const analyzedSessions = new Set<string>()
   let lastKnownSessionId: string | null = null
 
@@ -134,6 +134,9 @@ export const ReflectPlugin: Plugin = async ({ client, directory }) => {
       })
 
       const transcript = formatTranscript(messages)
+
+      const reflectDir = `${directory}/reflect`
+      await $`mkdir -p ${reflectDir}`
 
       const reflectSession = await client.session.create({
         body: { title: `Reflect: ${title || sessionId}` },

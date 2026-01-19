@@ -1,7 +1,6 @@
 ---
 description: Process Specialist that analyzes agentic infrastructure symptoms and produces remedies for Reflect
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
 tools:
   write: true
   edit: false

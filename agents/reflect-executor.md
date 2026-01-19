@@ -1,7 +1,6 @@
 ---
 description: Executes refined improvement specifications by applying changes to the codebase for Reflect
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
 tools:
   write: true
   edit: true

@@ -1,7 +1,6 @@
 ---
 description: Session Analyzer that detects symptoms/opportunities and delegates to specialists for Reflect
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
 tools:
   write: false
   edit: false
