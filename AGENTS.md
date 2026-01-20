@@ -95,11 +95,11 @@ tools:
 ```
 
 ### Tool Permissions
-| Role | write | edit | bash | Notes |
-|------|-------|------|------|-------|
-| Classifier | false | false | false | Read-only, delegates |
-| Specialist | true | false | false | Creates output files |
-| Executor | true | true | true | Full access |
+| Role | read | write | edit | bash | Notes |
+|------|------|-------|------|------|-------|
+| Classifier | false | false | false | false | Analyzes input, delegates |
+| Specialist | true | true | false | false | Reads context, creates output files |
+| Executor | true | true | true | true | Full access |
 
 ## Output File Naming
 
