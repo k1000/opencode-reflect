@@ -2,6 +2,7 @@
 description: Knowledge Specialist that analyzes technical documentation symptoms and produces remedies for Reflect
 mode: subagent
 tools:
+  read: true
   write: true
   edit: false
   bash: false
@@ -74,15 +75,20 @@ Before producing a remedy, ask yourself:
 
 ## Output: Write Directly to Markdown
 
-Use the **Write tool** to save to: `{project_path}/reflect/YYYY-MM-DD_📚{confidence}_{slug-title}.md`
+Use the **Write tool** to save to the Output Directory provided in Session Context.
+
+**File path**: `[Output Directory]/YYYY-MM-DD_📚{confidence}_{slug-title}.md`
 
 Where `{confidence}` is: `⭐` (low), `⭐⭐` (medium), `⭐⭐⭐` (high)
+
+**CRITICAL**: Use the EXACT Output Directory path from Session Context. Do not guess or use placeholders.
 
 Include ALL fields:
 
 ```markdown
 # Knowledge: {title}
 
+**Source Session:** {session_id}
 **Type:** knowledge
 **Mode:** plan|execute
 **Confidence:** high|medium|low
@@ -126,4 +132,4 @@ Replace `YYYY-MM-DD` with today's date and `{slug-title}` with kebab-case title.
 - Only document genuinely non-obvious information
 - Use clear, scannable formatting
 - Don't duplicate existing documentation
-- Use the project path from Session Context when constructing target_path
+- **ALWAYS write the output file** using the Write tool before completing

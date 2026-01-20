@@ -41,20 +41,21 @@ For each symptom you detect, use the Task tool with the appropriate subagent:
 - **automation** symptoms → `reflect-automation`
 - **knowledge** symptoms → `reflect-knowledge`
 
-Include in your prompt to the specialist:
+Include in your prompt to the specialist (use ACTUAL values from the Session Metadata above, not placeholders):
 ```
 ## Session Context
-Session: <session_id>
-Project: <project_path>
+Session: [actual session ID from Session Metadata]
+Project: [actual project path from Session Metadata]
+Output Directory: [project path]/reflect
 
 ## Symptom
-Type: <type>
-Description: <brief description of what was observed>
-Evidence: <specific quote or action from session>
-Severity: <high|medium|low>
-Locations: <file paths or modules where this occurred, if applicable>
+Type: [type]
+Description: [brief description of what was observed]
+Evidence: [specific quote or action from session]
+Severity: high|medium|low
+Locations: [file paths or modules where this occurred, if applicable]
 
-Analyze this symptom and produce a remedy.
+Write the remedy file to the Output Directory using the Write tool.
 ```
 
 ## Guidelines

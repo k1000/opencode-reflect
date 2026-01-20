@@ -37,6 +37,16 @@ export const ReflectPlugin: Plugin = async ({ client, directory, $ }) => {
     return lower.includes("reflect") || lower.includes("improvement")
   }
 
+  const hasExistingReflection = async (sessionId: string): Promise<boolean> => {
+    try {
+      const reflectDir = `${directory}/reflect`
+      const result = await $`ls ${reflectDir}/*.md 2>/dev/null | xargs grep -l ${sessionId} 2>/dev/null || true`
+      return result.stdout.trim().length > 0
+    } catch {
+      return false
+    }
+  }
+
   const countSessionStats = (messages: Message[]): { userMessages: number; toolCalls: number } => {
     let userMessages = 0
     let toolCalls = 0
@@ -101,6 +111,13 @@ export const ReflectPlugin: Plugin = async ({ client, directory, $ }) => {
     analyzedSessions.add(sessionId)
 
     try {
+      if (await hasExistingReflection(sessionId)) {
+        await client.app.log({
+          body: { service: "reflect", level: "debug", message: `Skip already processed: ${sessionId}` },
+        })
+        return
+      }
+
       const sessionResponse = await client.session.get({ path: { id: sessionId } })
       const session = sessionResponse.data as SessionData | undefined
       if (!session) return

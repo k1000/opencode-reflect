@@ -2,6 +2,7 @@
 description: Process Specialist that analyzes agentic infrastructure symptoms and produces remedies for Reflect
 mode: subagent
 tools:
+  read: true
   write: true
   edit: false
   bash: false
@@ -45,15 +46,20 @@ Before producing a remedy, ask yourself:
 
 ## Output: Write Directly to Markdown
 
-Use the **Write tool** to save to: `{project_path}/reflect/YYYY-MM-DD_⚙️{confidence}_{slug-title}.md`
+Use the **Write tool** to save to the Output Directory provided in Session Context.
+
+**File path**: `[Output Directory]/YYYY-MM-DD_⚙️{confidence}_{slug-title}.md`
 
 Where `{confidence}` is: `⭐` (low), `⭐⭐` (medium), `⭐⭐⭐` (high)
+
+**CRITICAL**: Use the EXACT Output Directory path from Session Context. Do not guess or use placeholders.
 
 Include ALL fields:
 
 ```markdown
 # Process: {title}
 
+**Source Session:** {session_id}
 **Type:** process
 **Mode:** plan|execute
 **Confidence:** high|medium|low
@@ -103,5 +109,5 @@ Write **generic, reusable rules** - NOT file-specific instructions:
 - **Use Glob/Read to check for existing files** before proposing new ones
 - Make content immediately usable - no placeholders
 - Choose the most specific target_type
-- Use the project path from Session Context when constructing target_path
 - Be concise but complete
+- **ALWAYS write the output file** using the Write tool before completing
